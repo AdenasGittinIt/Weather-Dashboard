@@ -5,17 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <title>Weather Dashboard</title>
+  <title>Weather Dash</title>
 
   </head>
 <body>
-  <input type="text" name="city" id="city-input">
-  <input type="button" value="Search" id="search">
-  <div class="city"></div>
-  <div class="wind"></div>
-  <div class="humidity"></div>
-  <div class="temp"></div>
+  <form>
+    <label for="city">Enter a city to get started:</label>
+    <input type="text" name="city" id="city-input" placeholder="enter a city name here">
+    <input type="button" value="Search" id="search">
+  </form>
+
+  <div class="current-conditions">
+    <p class="city"></p>
+    <div class="icon"></div>
+    <p class="wind"></p>
+    <p class="humidity"></p>
+    <p class="temp"></p>
+  </div>
+  <br>
+  <div class="five-day">
+    <div id="icon"></div>
+    <p class="wind"></p>
+    <p class="humidity"></p>
+    <p class="temp"></p>
+  </div>
   
+
+
 </body>
 <script
 src="https://code.jquery.com/jquery-2.2.4.js"
