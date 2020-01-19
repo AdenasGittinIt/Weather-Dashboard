@@ -9,6 +9,7 @@
 
   </head>
 <body>
+
   <form>
     <label for="city">Enter a city to get started:</label>
     <input type="text" name="city" id="city-input" placeholder="enter a city name here">
@@ -16,18 +17,17 @@
   </form>
 
   <div class="current-conditions">
+    <h2 class="current-info"></h2>   
     <p class="city"></p>
     <div class="icon"></div>
-    <p class="wind"></p>
-    <p class="humidity"></p>
     <p class="temp"></p>
+    <p class="humidity"></p>
+    <p class="wind"></p>
+    <p class="uv"></p>
   </div>
   <br>
+  Five Day Forecast:
   <div class="five-day">
-    <div id="icon"></div>
-    <p class="wind"></p>
-    <p class="humidity"></p>
-    <p class="temp"></p>
   </div>
   
 
@@ -37,6 +37,8 @@
 src="https://code.jquery.com/jquery-2.2.4.js"
 integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
 crossorigin="anonymous"></script>
+<!-- Link to Moment.js should go here -->
+<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 <script src="assets/script.js"></script>
 
 </html>
