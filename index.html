@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,36 +8,33 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <title>Weather Dash</title>
 
-  </head>
+</head>
+
 <body>
 
   <form>
-    <label for="city">Enter a city to get started:</label>
+    <label for="city" >Enter a city to get started:</label>
     <input type="text" name="city" id="city-input" placeholder="enter a city name here">
     <input type="button" value="Search" id="search">
   </form>
 
   <div class="current-conditions">
-    <h2 class="current-info"></h2>   
-    <p class="city"></p>
-    <div class="icon"></div>
-    <p class="temp"></p>
-    <p class="humidity"></p>
-    <p class="wind"></p>
-    <p class="uv"></p>
+    <h2 id="current-info" class="header"></h2>
+    <p id="city"></p>
+    <div id="icon"></div>
+    <p id="temp"></p>
+    <p id="humidity"></p>
+    <p id="wind"></p>
+    <p id="uv"></p>
   </div>
   <br>
-  Five Day Forecast:
-  <div class="five-day">
-  </div>
-  
 
+  <div id="five-day" class="col s12 m7">
+  </div>
 
 </body>
-<script
-src="https://code.jquery.com/jquery-2.2.4.js"
-integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
-crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+  crossorigin="anonymous"></script>
 <!-- Link to Moment.js should go here -->
 <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 <script src="assets/script.js"></script>

@@ -4,21 +4,13 @@ $("#search").on("click", function() {
     .val()
     .trim()
     .toLowerCase();
-  
+
   const apiKey = "00604984263164d160d696afed305b97";
 
   // Building the URLs needed for the ajax request
   let weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&units=imperial&appid=${apiKey}`;
-  
-  let forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityInput},&units=imperial&appid=${apiKey}`;  
-  
-  let getUviUrl = (lat,lon,apiKey) => {
- //https://samples.openweathermap.org/data/2.5/uvi?lat=37.75&lon=-122.37&appid=00604984263164d160d696afed305b97
-    let uviUrl = `https://samples.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&appi=${apiKey}`;
-    return uviUrl;
-  }
 
-
+  let forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityInput},&units=imperial&appid=${apiKey}`;
 
   // ajax call for current weather conditions
   $.ajax({
@@ -37,116 +29,88 @@ $("#search").on("click", function() {
     console.log("Humidity: " + res.main.humidity);
     console.log("Temperature (F): " + res.main.temp);
 
-    $(".current-info").html(`${res.name}  (${moment(res.dt,"X").format("MM/DD/YYYY")} )`)
     // Populate HTML with current conditions
-    $(".city").html(`<h4> Weather Details for ${res.name}</h4>`);
-    $(".icon").html(`
+
+    $("#current-info").html(
+      `Right now in ${res.name}  (${moment(res.dt, "X").format("MM/DD/YYYY")}) `
+    );
+    $("#city").html(`<h4> Weather Details:`);
+    $("#icon").html(`
     <figure>
     <img src="http://openweathermap.org/img/wn/${res.weather[0].icon}@2x.png" alt="weather icon">
     <figcaption>${res.weather[0].description}</figcaption>
     </figure>`);
-    $(".wind").html(`<h5> Wind Speed: ${res.wind.speed}</h5>`);
-    $(".humidity").html(`<h5> Humidity: ${res.main.humidity}%</h5>`);
-    $(".temp").html(`<h5> Temperature (F): ${res.main.temp}</h5>`);
+    $("#wind").html(`<h5> Wind Speed: ${res.wind.speed}</h5>`);
+    $("#humidity").html(`<h5> Humidity: ${res.main.humidity}%</h5>`);
+    $("#temp").html(`<h5> Temperature (F): ${res.main.temp}</h5>`);
+
+    // ajax call for the UV index. The UV index API is only available to paid accounts
     $.ajax({
       url: `https://cors-anywhere.herokuapp.com/https://samples.openweathermap.org/data/2.5/uvi?lat=${res.coord.lat}&lon=${res.coord.lon}&appid=00604984263164d160d696afed305b97`,
       method: "GET"
     }).then(function(res) {
-      $(".uv").html(`<h5>UV i: ${res.value}`)
+      $(".uv").html(`<h5>Fake UV Index: ${res.value}`);
       console.log("this is the UV i: " + res.value);
     });
-    });
-    
-
-    
+  });
 
   // ajax call for five day forecast weather conditions.
   $.ajax({
     url: forecastUrl,
     method: "GET"
   }).then(function(res) {
-    
-    console.log("forecast URL: " + forecastUrl);
     console.log(res);
-    console.log("temperature: " + res.list[0].main.temp);
 
-    // var forecastArr = res.list
+    // emptying html from previous search
     $(".five-day").empty();
-    var prevRow = "";
-    var currentRow;
-    var count = 0; 
-    var totalTemp = 0;
-    var totalHumid = 0
-    var countToAverage = 0;
+
     const forecastDays = [];
+    const fiveDayDetails = [];
 
     // const found = forecastArr.find(element => element > 10);
 
-    const filteredForecast = res.list.filter(function(hourly){
-        if(forecastDays.includes(moment(hourly.dt, "X").format("MM/DD/YYYY"))){
-          return false
-        } else {
-          forecastDays.push(moment(hourly.dt, "X").format("MM/DD/YYYY"))
-        }
-    });  
-    console.log(filteredForecast);
-    console.log(forecastDays)
+    res.list.filter(function(hourly) {
+      let forecastDate = moment(hourly.dt, "X").format("MM/DD/YYYY");
+      if (
+        forecastDays.includes(forecastDate) ||
+        forecastDate === moment().format("MM/DD/YYYY")
+      ) {
+        return false;
+      } else {
+        forecastDays.push(moment(hourly.dt, "X").format("MM/DD/YYYY"));
+        fiveDayDetails.push({
+          date: moment(hourly.dt, "X").format("MM/DD/YYYY"),
+          temp: hourly.main.temp,
+          humidity: hourly.main.humidity,
+          description: hourly.weather[0].description,
+          inconUrl: `http://openweathermap.org/img/wn/${hourly.weather[0].icon}@2x.png`
+        });
+      }
+      console.log(fiveDayDetails);
+    });
+    fiveDayDetails.forEach(day => {
+      // ICON DATE TEMP HUMIDITY
 
+      let icon = day.inconUrl;
+      let date = day.date;
+      let temp = day.temp;
+      let humidity = day.humidity;
+      let description = day.description;
 
-
-
-
-
-    // for (let i = 0; i < forecastArr.length; i++) {
-
-    //      currentRow = moment(forecastArr[i].dt,"X").format("MM/DD/YYYY");
-    //      totalTemp = totalTemp + forecastArr[i].main.temp
-    //      console.log(moment(forecastArr[i].dt,"X").format("MM/DD/YYYY"), forecastArr[i].main.temp)
-
-         
-
-    //      if(prevRow != currentRow && count < 5  ) {
-    //        $(".five-day").append(moment(forecastArr[i].dt,"X").format("MM/DD/YYYY"),$("<br>"))//moment(res.dt,"X").format("MM/DD/YYYY")
-    //        $(".five-day").append($(`<img src="http://openweathermap.org/img/wn/${forecastArr[i].weather[0].icon}@2x.png" alt="weather icon">`))
-           
-    //        totalTemp = totalTemp/countToAverage;
-           
-    //        $(".five-day").append($("<br>"),`Aveage Temp: ${totalTemp}`, $("<br>"))
-           
-    //        countToAverage++;
-    //        count++;
-    //        countToAverage = 0
-    //        totalTemp = 0
-          
-    //     }
-        
-    //     prevRow = currentRow;
-    //     // <figure>
-    //     // <img src="http://openweathermap.org/img/wn/${res.weather[0].icon}@2x.png" alt="weather icon">
-    //     // <figcaption>${res.weather[0].description}</figcaption>
-    //     // </figure>`)
-      
-    // }
-
-
-    // need to filter the results so that only elements that are at least 24, 48, 72, 96 and 120 hours from the current date and time are returned.
-
-    // $(".city").html(`<h4> Weather Details for ${res.name}</h4>`);
-    // $(".icon").html(`
-    // <figure>
-    // <img src="http://openweathermap.org/img/wn/${res.weather[0].icon}@2x.png" alt="weather icon">
-    // <figcaption>${res.weather[0].description}</figcaption>
-    // </figure>`);
-    // $(".wind").html(`<h5> Wind Speed: ${res.wind.speed}</h5>`);
-    // $(".humidity").html(`<h5> Humidity: ${res.main.humidity}%</h5>`);
-    // $(".temp").html(`<h5> Temperature (F): ${res.main.temp}</h5>`);
-
+      $("#five-day").append(`
+      <h2 class="header"> ${date}<h2/>
+        <div class="card horizontal">
+      <div class="card-image">
+        <img src=${icon} alt="weather icon">
+      </div>
+      <div class="card-stacked">
+        <div class="card-content">
+        <p>${description}<p/>
+        <p>Temp: ${temp}<p/>
+      <p>Humidity: ${humidity}<p/>
+    </div>
+   </div>
+  <div/>`);
+    });
   });
-
-
-
-  
 });
-
-
-
