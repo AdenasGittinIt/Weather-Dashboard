@@ -4,19 +4,18 @@ let emptyHistory = [];
 
 
 $().ready(function() {
+  //clear search history
+  $("#history-list").empty();
   let searchHist = defineHistArray(historyArray,emptyHistory);
   let lastCity = searchHist.pop();
+
   // insert the lastCity as the value of the search text input and then simulate a click to search 
   if(lastCity !== undefined) {
     $("#city-input").val(lastCity);
     $("#search").click();
-    displayCities(searchHist);
-    $("#five-day").empty();
   } else {
     return  
   }
-  // insert the last searched city in the search field and bring up current details (so essentially the on click with out a click)
-
 })
 
 
@@ -39,7 +38,8 @@ $("#search").on("click", function() {
   //adding city to local storage
   searchHist.push(cityInput);
   saveCities(searchHist);
-
+  $("#history-list").empty();
+  displayCities(searchHist);
 
 
   // ajax call for current weather conditions
@@ -64,7 +64,7 @@ $("#search").on("click", function() {
     $("#current-info").html(
       `${res.name} on ${moment(res.dt, "X").format("ddd MMM D, h:mm a")}`
     );
-    // $("#weather-details").html(`<h5> Weather Details: </h5>`);
+   
     $("#icon").html(` 
     <figure>
     <img src="http://openweathermap.org/img/wn/${res.weather[0].icon}@2x.png" alt="weather icon">
@@ -74,7 +74,7 @@ $("#search").on("click", function() {
     $("#humidity").html(`Humidity: ${res.main.humidity}%`);
     $("#temp").html(`Temperature (F): ${res.main.temp}°`);
 
-    // ajax call for the UV index. The UV index API is only available to paid accounts
+    // ajax call for the UV index. The UV index API is only available to paid accounts so I'm using the sample
     $.ajax({
       url: `https://cors-anywhere.herokuapp.com/https://samples.openweathermap.org/data/2.5/uvi?lat=${res.coord.lat}&lon=${res.coord.lon}&appid=00604984263164d160d696afed305b97`,
       method: "GET"
@@ -96,8 +96,6 @@ $("#search").on("click", function() {
 
     const forecastDays = [];
     const fiveDayDetails = [];
-
-    // const found = forecastArr.find(element => element > 10);
 
     res.list.filter(function(hourly) {
       let forecastDate = moment(hourly.dt, "X").format("MM/DD/YYYY");
@@ -156,8 +154,9 @@ const saveCities = (array) => {
 }
 
 const displayCities = (array) => {
+  let historyList = $("#history-list");
+  historyList.append(`<a href="#" class="collection-item active">Search History: </a>`)
   array.forEach(city => {
-    let historyList = $("#history-list");
     historyList.append(`<a href="#" class="collection-item">${city}</a>`);
   });
 }
