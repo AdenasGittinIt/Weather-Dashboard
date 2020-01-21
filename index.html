@@ -6,37 +6,60 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <title>Weather Dash</title>
-
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <title>Scratch Weather Dash</title>
 </head>
 
 <body>
+  <div class="container">
+    <div class="row">
+      <div class="col s12 nav-wrapper">
+        <nav>
+            <a href="#" class="brand-logo center">Weather Dashboard!</a>
+        </nav>
+      </div>  <!--this is the nav wraooer --> 
+    </div>  <!--this is the row for the nav bar -->
 
-  <form>
-    <label for="city" >Enter a city to get started:</label>
-    <input type="text" name="city" id="city-input" placeholder="enter a city name here">
-    <input type="button" value="Search" id="search">
-  </form>
 
-  <div class="current-conditions">
-    <h2 id="current-info" class="header"></h2>
-    <p id="city"></p>
-    <div id="icon"></div>
-    <p id="temp"></p>
-    <p id="humidity"></p>
-    <p id="wind"></p>
-    <p id="uv"></p>
-  </div>
-  <br>
+    <div class="row"> <!--row for everything else-->
+      <div class="col s12 l3" >
+        <div id="city-info" class="input-field" >
+          <input id="city-input" type="text" placeholder="City">
+          <a id="search" class="waves-effect waves-light btn-small"><i class="material-icons right">search</i>search</a>
+        </div>
+        <div id="history-list" class="collection">
+          <!-- <a href="#!" class="collection-item"></a>
+          <a href="#!" class="collection-item"></a>
+          <a href="#!" class="collection-item"></a>
+          <a href="#!" class="collection-item"></a> -->
+        </div>
+      </div>  
 
-  <div id="five-day" class="col s12 m7">
-  </div>
+      <div class="col s12 l9">
+        <div class="current-conditions">
+          <h4 id="current-info"></h4>
+          <!-- <h5 id="weather-details"></h5> -->
+          <div id="icon"></div>
+          <h5 id="temp"></h5>
+          <h5 id="humidity"></h5>
+          <h5 id="wind"></h5>
+          <h5 id="uv"></h5>
+          <br>
+          <br>
+          <h5 id="five-day-header"></h5>
+        </div> <!--div for the current conditions-->
+        <div id="five-day"></div> <!--div for five day forcast cards-->
+      </div> <!--column for weather information-->
+    </div>  <!--row for everything else-->
 
+  </div> <!--this is the cotainer div everything goes inside here!-->
 </body>
+
 <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
   crossorigin="anonymous"></script>
 <!-- Link to Moment.js should go here -->
 <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 <script src="assets/script.js"></script>
 
-</html>
+</html>      
+
