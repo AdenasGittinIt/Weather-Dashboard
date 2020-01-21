@@ -11,6 +11,7 @@ $().ready(function() {
     $("#city-input").val(lastCity);
     $("#search").click();
     displayCities(searchHist);
+    $("#five-day").empty();
   } else {
     return  
   }
@@ -91,7 +92,7 @@ $("#search").on("click", function() {
     console.log(res);
 
     // emptying html from previous search
-    $(".five-day").empty();
+    $("five-day").empty();
 
     const forecastDays = [];
     const fiveDayDetails = [];
