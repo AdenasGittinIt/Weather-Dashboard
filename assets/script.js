@@ -92,7 +92,7 @@ $("#search").on("click", function() {
     console.log(res);
 
     // emptying html from previous search
-    $("five-day").empty();
+    $("#five-day").empty();
 
     const forecastDays = [];
     const fiveDayDetails = [];
