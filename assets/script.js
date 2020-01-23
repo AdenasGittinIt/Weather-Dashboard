@@ -155,8 +155,8 @@ const saveCities = (array) => {
 
 const displayCities = (array) => {
   let historyList = $("#history-list");
-  historyList.append(`<a href="#" class="collection-item active">Search History: </a>`)
+  historyList.append(`<a href="#" class="collection-item active grey white-text">SEARCH HISTORY: </a>`)
   array.forEach(city => {
-    historyList.append(`<a href="#" class="collection-item">${city}</a>`);
+    historyList.append(`<a href="#" class="collection-item grey-text">${city}</a>`);
   });
 }
