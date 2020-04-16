@@ -118,10 +118,7 @@ $("#search").on("click", function() {
     });
     fiveDayDetails.forEach(day => {
       let icon = day.inconUrl;
-      let date = day.date;
-      let temp = day.temp;
-      let humidity = day.humidity;
-      let description = day.description;
+      const {date, temp, humidity, description} = day
 
       $("#five-day").append(`
       <h6 class="header"> ${date}</h6>
