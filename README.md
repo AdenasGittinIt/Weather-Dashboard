@@ -15,6 +15,8 @@ Get the current weather and 7 day forecast for any city in the world!  I develop
 
 In the field labeled 'City', enter the name of any city in the world in the world then click search to display it's current weather and seven day forecast.  The city you searched for will be added to your history.  Click on the city in your search history to get the updated weather and seven day forecast.
 
+[Weather Dashboard](https://adenasgittinit.github.io/Weather-Dashboard/)
+
 ## Technologies Used
 
 * JavaScript
@@ -23,7 +25,7 @@ In the field labeled 'City', enter the name of any city in the world in the worl
 * Materilize CSS
 * AJAX
 
-## Contributor
+## Author
 
 * [Adena McGibbon](https://github.com/AdenasGittinIt)
 
