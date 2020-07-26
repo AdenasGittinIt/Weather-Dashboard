@@ -28,14 +28,13 @@
           <a id="search" class="waves-effect waves-light btn-small grey white-text"><i class="material-icons right ">search</i>search</a>
         </div>
         <div id="history-list" class="collection">
-          <!-- <a class="collection-item active">Search History</a> -->
-
-        </div>
+          <!--search history loads here-->
+        </div> 
       </div>  
 
-      <div class="col s12 l10">
+      <div class="col s12 l10" >
         <div class="current-conditions">
-          <h4 id="current-info"></h4>
+          <h3 id="today"></h3>
           <!-- <h5 id="weather-details"></h5> -->
           <div id="icon"></div>
           <h5 id="temp"></h5>
@@ -45,8 +44,10 @@
           <br>
           <br>
           <h5 id="five-day-header"></h5>
-        </div> <!--div for the current conditions-->
-        <div id="five-day"></div> <!--div for five day forcast cards-->
+        </div> <!--end div for the current conditions-->
+        <div class="row" id="five-day">
+          <!--five day forecast loads here-->
+        </div> <!-- close div for five day forecast-->
       </div> <!--column for weather information-->
     </div>  <!--row for everything else-->
 
@@ -57,7 +58,7 @@
   crossorigin="anonymous"></script>
 <!-- Link to Moment.js should go here -->
 <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-<script src="script.js"></script>
+<script src="altDisplay.js"></script>
 <!-- <script src="/assets/script.js" ></script> -->
 </html>      
 
