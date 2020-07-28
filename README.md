@@ -1,6 +1,6 @@
 # Weather-Dashboard
 
-Get the current weather and 7 day forecast for any city in the world!  I developed this simple yet powerful app to get familiar with implementing HTTP GET requests and handling the JSON responses using AJAX.  The JASON response is parsed to dynamically generate HTML.
+Get the current weather and 7 day forecast for any city in the world!  I developed this simple yet powerful app to familiarize myself with implementing HTTP GET requests and handling the JSON responses using AJAX.  The JASON response is parsed and used while dynamically generating HTML with the use of jQuery.
 
 ## User Story
 
@@ -20,9 +20,9 @@ Go to [Weather Dashboard](https://adenasgittinit.github.io/Weather-Dashboard/)
 ## Technologies Used
 
 * JavaScript
-* jQeury
+* jQuery
 * HTML
-* Materilize CSS
+* Materilize CSS CDN
 * AJAX
 
 ## Author

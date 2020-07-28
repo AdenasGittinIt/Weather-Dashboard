@@ -44,24 +44,37 @@ $("#search").on("click", function() {
     url: weatherUrl,
     method: "GET"
   }).then(function(res) {
+    
+    
     // set lat and lon in local storage to use in the UV index URL and API call
     localStorage.setItem("lat", res.coord.lat);
     localStorage.setItem("lon", res.coord.lon);
-
     // Populate HTML with current conditions
+
 
     $("#today").html(
       `${res.name} on ${moment(res.dt, "X").format("ddd MMM D, h:mm a")}`
     );
 
-    $("#icon").html(` 
-    <figure>
-    <img src="http://openweathermap.org/img/wn/${res.weather[0].icon}@2x.png" alt="weather icon">
-    <figcaption>${res.weather[0].description}</figcaption>
-    </figure>`);
-    $("#wind").html(`Wind Speed: ${res.wind.speed}`);
-    $("#humidity").html(`Humidity: ${res.main.humidity}%`);
-    $("#temp").html(`Temperature (F): ${res.main.temp}°`);
+    let imgSrc = `http://openweathermap.org/img/wn/${res.weather[0].icon}@2x.png`;
+    let currentTemp = res.main.temp;
+    let currentHumid = res.main.humidity;
+    let windSpeed = res.wind.speed;
+    let currentDescription = res.weather[0].description;
+
+    $("#current-conditions").append(`
+    <div class="card">
+      <div class="card-image">
+        <img src=${imgSrc} style="width: 250px;">
+        <span class="card-title black-text">${currentDescription}</span>
+      </div>
+      <div class="card-content">
+        <h4>Temperature (F): ${currentTemp}°</h4>
+        <h4>Humidity: ${currentHumid}%</h4>
+        <h4>Wind Speed: ${windSpeed}</h4>
+        <h4 id="uv"></h4>
+      </div>
+    </div>`)
 
     // ajax call for the UV index. The UV index API is only available to paid accounts so I'm using the sample
     $.ajax({
@@ -69,7 +82,6 @@ $("#search").on("click", function() {
       method: "GET"
     }).then(function(res) {
       $("#uv").html(`Fake UV Index: ${res.value}`);
-      $("#five-day-header").html("Five Day Forecast:");
     });
   });
 
@@ -78,11 +90,9 @@ $("#search").on("click", function() {
     url: forecastUrl,
     method: "GET"
   }).then(function(res) {
-    console.log(res);
 
     // emptying html from previous search
     $("#five-day").empty();
-
     const forecastDays = [];
     const fiveDayDetails = [];
 
@@ -103,19 +113,13 @@ $("#search").on("click", function() {
           inconUrl: `http://openweathermap.org/img/wn/${hourly.weather[0].icon}@2x.png`
         });
       }
-      // console.log(fiveDayDetails);
     });
 
-
-    var col = "";
-
     fiveDayDetails.forEach(day => {
-      const { date, temp, humidity, description, inconUrl } = day 
-
-      // console.log(day);
+    const { date, temp, humidity, description, inconUrl } = day 
       if (day !== undefined) {
         $("#five-day").append(`
-          <div class="col sm 12 lg1" style="padding-right: 5px;">
+          <div class="col sm 12 lg2" style="padding-right: 5px;">
             <div class="card">
               <div class="card-image">
                 <img src=${inconUrl}>
@@ -123,8 +127,8 @@ $("#search").on("click", function() {
               <div class="card-content">
                 <p class="card-title black-text">${date}</p>
                 <p>${description}</p>
-                <p>Temp: ${temp}</p>
-                <p>Humidity: ${humidity}</p>
+                <p>Temp: ${temp}°</p>
+                <p>Humidity: ${humidity}%</p>
               </div>
             </div>
           </div>`)

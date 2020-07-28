@@ -119,20 +119,40 @@ $("#events-col").append(`
       </div>`
 
 
-
-
-`     <div class="row">
-        <div class="col s12 m7">
-          <div class="card">
-            <div class="card-image">
-              <img src=${icon}>
-              <span class="card-title">${date}</span>
-            </div>
-            <div class="card-content">
-              <p>${description}</p>
-              <p>Temp: ${temp}</p>
-              <p>Humidity: ${humidity}</p>
-            </div>
-          </div>
+      let imgSrc = `http://openweathermap.org/img/wn/${res.weather[0].icon}@2x.png`;
+      let currentTemp = res.main.temp;
+      let currentHumid = res.main.humidity;
+      let windSpeed = res.wind.speed;
+      let currentDescription = res.weather[0].description;
+  
+      $("#current-conditions").append(`
+      <div class="card">
+        <div class="card-image">
+          <img src=${imgSrc}>
+          <span class="card-title black-text">${currentDescription}</span>
         </div>
-      </div>`
+        <div class="card-content">
+          <h4>Temperature (F): ${currentTemp}°</h4>
+          <h4>Humidity: ${currentHumid}%</h4>
+          <h4>Wind Speed: ${windSpeed}</h4>
+          <h4 id="uv"></h4>
+        </div>
+      </div>`)
+  
+
+
+
+// 
+//         <div class="col s12 l10">
+//           <div class="card">
+//             <div class="card-image">
+//               <img src=${icon}>
+//               <span class="card-title">${date}</span>
+//             </div>
+//             <div class="card-content">
+//               <p>${description}</p>
+//               <p>Temp: ${temp}</p>
+//               <p>Humidity: ${humidity}</p>
+//             </div>
+//           </div>
+//         </div>
