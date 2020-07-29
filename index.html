@@ -11,17 +11,23 @@
 </head>
 
 <body>
+
+
+
+  
   <div class="container">
-    <div class="row">
+
+    <nav class="nav-extended orange darken-3">
       <div class="col s12 nav-wrapper">
-        <nav class="orange darken-3">
-            <a href="#" class="brand-logo center">Weather Dashboard!</a>
-        </nav>
+        <div class="nav-content">
+            <a class="brand-logo center">Weather Dashboard!</a>
+        </div>
       </div>  <!--this is the nav wrapper --> 
-    </div>  <!--this is the row for the nav bar -->
+    </nav>  <!--this is the row for the nav bar -->
 
 
     <div class="row grey lighten-5"> <!--row for everything else-->
+      
       <div class="col s12 l2" >
         <div id="city-info" class="input-field" >
           <input id="city-input" type="text" placeholder="City">
@@ -37,23 +43,20 @@
         <div id="current-conditions">
               <!-- current weather conditions load here-->
         </div>
-          <br>
-          <br>
-          <h4 id="five-day-header">Five Day Forecast:</h4>
-          <div class="row" id="five-day">
+        <br>
+        <br>
+        <h4 id="five-day-header">Five Day Forecast:</h4>
+        <div class="row" id="five-day">
             <!--five day forecast loads here-->
-          </div> <!-- close div for five day forecast-->
-        </div> <!--end div id="current conditions"-->
-      </div> <!--column for weather information-->
+        </div> <!-- close div for five day forecast-->
+      </div> <!--end div id="current conditions"-->
+      
     </div>  <!--row for everything else-->
-  </div> <!--this is the cotainer div everything goes inside here!-->
+  </div>
 </body>
-
-<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
-  crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
 <!-- Link to Moment.js should go here -->
 <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-<script src="script.js"></script>
-<!-- <script src="/assets/script.js" ></script> -->
+<script src="assets/script.js" ></script>
 </html>      
 
